@@ -33,7 +33,9 @@ public class LecturerClassListRowAdapter extends RecyclerView.Adapter<LecturerCl
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(view.getContext(),TestActivity.class);
+                Intent intent=new Intent(view.getContext(),ClassAttendenceActivity.class);
+                intent.putExtra("document",classes.url);
+                Log.d("Just a text",classes.url);
                 view.getContext().startActivity(intent);
             }
         });
