@@ -68,7 +68,7 @@ public class ClassAttendenceActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager=new LinearLayoutManager(ClassAttendenceActivity.this);
         recyclerView.setLayoutManager(layoutManager);
         populateStudentList(incomingIntentData);
-        //handleIntent(getIntent());
+        handleIntent(getIntent());
 
 
     }
