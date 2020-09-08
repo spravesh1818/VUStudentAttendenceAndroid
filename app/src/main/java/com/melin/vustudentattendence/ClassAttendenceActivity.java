@@ -61,16 +61,14 @@ public class ClassAttendenceActivity extends AppCompatActivity {
         }else{
             Toast.makeText(this, "NFC is in reader mode", Toast.LENGTH_SHORT).show();
         }
-        incomingIntentData=getIntent().getExtras().getString("document");
-        fs=FirebaseFirestore.getInstance();
+        //incomingIntentData=getIntent().getExtras().getString("document");
+        //fs=FirebaseFirestore.getInstance();
         //Toast.makeText(this,incomingIntentData,Toast.LENGTH_LONG).show();
-        recyclerView=(RecyclerView)findViewById(R.id.attendenceListRecyclerView);
-        LinearLayoutManager layoutManager=new LinearLayoutManager(ClassAttendenceActivity.this);
-        recyclerView.setLayoutManager(layoutManager);
-        populateStudentList(incomingIntentData);
+        //recyclerView=(RecyclerView)findViewById(R.id.attendenceListRecyclerView);
+//        LinearLayoutManager layoutManager=new LinearLayoutManager(ClassAttendenceActivity.this);
+//        recyclerView.setLayoutManager(layoutManager);
+//        populateStudentList(incomingIntentData);
         handleIntent(getIntent());
-
-
     }
 
     private void populateStudentList(String url){
