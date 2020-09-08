@@ -1,0 +1,91 @@
+{
+  "project_info": {
+    "project_number": "283869283737",
+    "firebase_url": "https://studentattendencevu.firebaseio.com",
+    "project_id": "studentattendencevu",
+    "storage_bucket": "studentattendencevu.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:283869283737:android:6a7c9c57f721b066533f08",
+        "android_client_info": {
+          "package_name": "com.example.stdattendenceapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "283869283737-nmejb394tj0l1qk2rhno2hlr8lcfc1ld.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8_8axzRFaJhviaIx0tN0r1Q1xjmWR5uU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "283869283737-nmejb394tj0l1qk2rhno2hlr8lcfc1ld.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "283869283737-gndbmk0bksppj095umjtd1lbn8jr8ghc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.stdattendenceapp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:283869283737:android:2eea86be49aaa489533f08",
+        "android_client_info": {
+          "package_name": "com.melin.vustudentattendence"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "283869283737-8d70hohe6m2224o5pl7q0bibr89fbdlo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.melin.vustudentattendence",
+            "certificate_hash": "961632d8435a87d80595199df2ece5d5849bc58d"
+          }
+        },
+        {
+          "client_id": "283869283737-nmejb394tj0l1qk2rhno2hlr8lcfc1ld.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8_8axzRFaJhviaIx0tN0r1Q1xjmWR5uU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "283869283737-nmejb394tj0l1qk2rhno2hlr8lcfc1ld.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "283869283737-gndbmk0bksppj095umjtd1lbn8jr8ghc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.stdattendenceapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
