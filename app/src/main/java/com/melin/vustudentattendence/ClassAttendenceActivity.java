@@ -253,15 +253,18 @@ public class ClassAttendenceActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             if (result != null) {
-                for(Student student:students){
-                    if(student.getStudent_id().equals(result)){
-                        student.setStatus("PRESENT");
-                        Toast.makeText(ClassAttendenceActivity.this,"Student ID"+student.getStudent_id()+"Detected",Toast.LENGTH_LONG).show();
-                    }
-                }
 
-                adapter=new ClassAttendenceRowAdapter(students);
-                recyclerView.setAdapter(adapter);
+                Toast.makeText(ClassAttendenceActivity.this,"Student ID"+result+"Detected",Toast.LENGTH_LONG).show();
+
+//                for(Student student:students){
+//                    if(student.getStudent_id().equals(result)){
+//                        student.setStatus("PRESENT");
+//                        Toast.makeText(ClassAttendenceActivity.this,"Student ID"+student.getStudent_id()+"Detected",Toast.LENGTH_LONG).show();
+//                    }
+//                }
+//
+//                adapter=new ClassAttendenceRowAdapter(students);
+//                recyclerView.setAdapter(adapter);
             }
         }
     }
