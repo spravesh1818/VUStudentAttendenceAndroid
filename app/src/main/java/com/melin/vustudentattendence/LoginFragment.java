@@ -115,7 +115,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     mProgress.dismiss();
-                    Log.d("Sign In", "User signed in");
+                    final String uid=task.getResult().getUser().getUid();
+                    Log.d("Sign In","Sucessfully logged in");
                     Toast.makeText(getActivity(), "Authentication successful.",
                             Toast.LENGTH_SHORT).show();
                     fs=FirebaseFirestore.getInstance();
@@ -127,12 +128,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     Map<String,Object> data=document.getData();
+                                    Log.d("Get user uid",document.getId());
                                     Log.d("Firebase instance",data.get("role").toString());
-                                    if(data.get("role").toString().equals("admin")){
+                                    if(data.get("role").toString().equals("admin") && uid.equals(document.getId().toString())){
                                         Intent homeActivity = new Intent(getActivity(), InstituteDashboardActivity.class);
                                         homeActivity.putExtra("email",email);
                                         startActivity(homeActivity);
-                                    }else if(data.get("role").toString().equals("lecturer")){
+                                    }else if(data.get("role").toString().equals("lecturer") && uid.equals(document.getId().toString())){
                                         Intent homeActivity = new Intent(getActivity(), LecturerDashboardActivity.class);
                                         homeActivity.putExtra("email",email);
                                         startActivity(homeActivity);

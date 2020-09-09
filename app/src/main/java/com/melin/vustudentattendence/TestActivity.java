@@ -28,11 +28,102 @@ public class TestActivity extends AppCompatActivity {
     private TextView mTextView;
     private NfcAdapter mNfcAdapter;
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_test);
 
+        // Checks for NFC availability in the device
+        mTextView=(TextView)findViewById(R.id.textView_explanation);
+        mNfcAdapter=NfcAdapter.getDefaultAdapter(this);
+        if(mNfcAdapter!=null && mNfcAdapter.isEnabled()){
+            Toast.makeText(this, "NFC available! Touch a tag", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "NFC not available! Confirm if the device is NFC-enabled and switch it on from the settings.", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+
+        handleIntent(getIntent());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setupForegroundDispatch(this, mNfcAdapter);
+    }
+
+    @Override
+    protected void onPause() {
+        stopForegroundDispatch(this,mNfcAdapter);
+        super.onPause();
+    }
+
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        handleIntent(intent);
+    }
+
+    private void handleIntent(Intent intent){
+        String action = intent.getAction();
+        if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) {
+
+            String type = intent.getType();
+            if (ClipDescription.MIMETYPE_TEXT_PLAIN.equals(type)) {
+
+                Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+                new NdefReaderTask().execute(tag);
+
+            } else {
+                Log.d(TAG, "Wrong mime type: " + type);
+            }
+        } else if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)) {
+
+            // In case we would still use the Tech Discovered Intent
+            Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+            String[] techList = tag.getTechList();
+            String searchedTech = Ndef.class.getName();
+
+            for (String tech : techList) {
+                if (searchedTech.equals(tech)) {
+                    new NdefReaderTask().execute(tag);
+                    break;
+                }
+            }
+        }
+    }
+
+    public static void setupForegroundDispatch(final Activity activity, NfcAdapter adapter) {
+        final Intent intent = new Intent(activity.getApplicationContext(), activity.getClass());
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+        final PendingIntent pendingIntent = PendingIntent.getActivity(activity.getApplicationContext(), 0, intent, 0);
+
+        IntentFilter[] filters = new IntentFilter[1];
+        String[][] techList = new String[][]{};
+
+        // Notice that this is the same filter as in our manifest.
+        filters[0] = new IntentFilter();
+        filters[0].addAction(NfcAdapter.ACTION_NDEF_DISCOVERED);
+        filters[0].addCategory(Intent.CATEGORY_DEFAULT);
+        try {
+            filters[0].addDataType(ClipDescription.MIMETYPE_TEXT_PLAIN);
+        } catch (IntentFilter.MalformedMimeTypeException e) {
+            throw new RuntimeException("Check your mime type.");
+        }
+
+        adapter.enableForegroundDispatch(activity, pendingIntent, filters, techList);
+    }
+
+    public static void stopForegroundDispatch(final Activity activity, NfcAdapter adapter) {
+        adapter.disableForegroundDispatch(activity);
+    }
+
+    /**
+     * Background task for reading the data
+     */
     public class NdefReaderTask extends AsyncTask<Tag,Void,String> {
-
-
-
         @Override
         protected String doInBackground(Tag... params) {
             Tag tag = params[0];
@@ -76,7 +167,7 @@ public class TestActivity extends AppCompatActivity {
             String textEncoding = ((payload[0] & 128) == 0) ? "UTF-8" : "UTF-16";
 
             // Get the Language Code
-            int languageCodeLength = payload[0] & 0063;
+            int languageCodeLength = payload[0] & 63;
 
             // String languageCode = new String(payload, 1, languageCodeLength, "US-ASCII");
             // e.g. "en"
@@ -88,105 +179,7 @@ public class TestActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             if (result != null) {
-                mTextView.setText("Read content: " + result);
-            }
-        }
-    }
-
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
-
-        mTextView=(TextView)findViewById(R.id.textView_explanation);
-        mNfcAdapter= NfcAdapter.getDefaultAdapter(this);
-        if(mNfcAdapter==null){
-            Toast.makeText(this,"This device doesn't support NFC",Toast.LENGTH_LONG).show();
-            finish();
-            return;
-        }
-        if(!mNfcAdapter.isEnabled()){
-            mTextView.setText("Nfc is disabled");
-        }else{
-            mTextView.setText(R.string.explanation);
-        }
-        handleIntent(getIntent());
-    }
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setupForegroundDispatch(this, mNfcAdapter);
-    }
-
-    @Override
-    protected void onPause() {
-        stopForegroundDispatch(this,mNfcAdapter);
-        super.onPause();
-    }
-
-
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        handleIntent(intent);
-    }
-
-    public static void setupForegroundDispatch(final Activity activity, NfcAdapter adapter) {
-        final Intent intent = new Intent(activity.getApplicationContext(), activity.getClass());
-        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-
-        final PendingIntent pendingIntent = PendingIntent.getActivity(activity.getApplicationContext(), 0, intent, 0);
-
-        IntentFilter[] filters = new IntentFilter[1];
-        String[][] techList = new String[][]{};
-
-        // Notice that this is the same filter as in our manifest.
-        filters[0] = new IntentFilter();
-        filters[0].addAction(NfcAdapter.ACTION_NDEF_DISCOVERED);
-        filters[0].addCategory(Intent.CATEGORY_DEFAULT);
-        try {
-            filters[0].addDataType(ClipDescription.MIMETYPE_TEXT_PLAIN);
-        } catch (IntentFilter.MalformedMimeTypeException e) {
-            throw new RuntimeException("Check your mime type.");
-        }
-
-        adapter.enableForegroundDispatch(activity, pendingIntent, filters, techList);
-    }
-
-    public static void stopForegroundDispatch(final Activity activity, NfcAdapter adapter) {
-        adapter.disableForegroundDispatch(activity);
-    }
-
-
-    private void handleIntent(Intent intent){
-        String action = intent.getAction();
-        if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) {
-
-            String type = intent.getType();
-            if (ClipDescription.MIMETYPE_TEXT_PLAIN.equals(type)) {
-
-                Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-                new NdefReaderTask().execute(tag);
-
-            } else {
-                Log.d(TAG, "Wrong mime type: " + type);
-            }
-        } else if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)) {
-
-            // In case we would still use the Tech Discovered Intent
-            Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-            String[] techList = tag.getTechList();
-            String searchedTech = Ndef.class.getName();
-
-            for (String tech : techList) {
-                if (searchedTech.equals(tech)) {
-                    new NdefReaderTask().execute(tag);
-                    break;
-                }
+                mTextView.setText("Content: " + result);
             }
         }
     }

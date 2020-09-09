@@ -18,8 +18,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TestActivity">
-
+        <activity android:name=".AddStudentsActivity"></activity>
+        <activity android:name=".AddClassesActivity" />
+        <activity android:name=".AddTeachersActivity" />
+        <activity android:name=".TestActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
@@ -27,25 +30,13 @@
 
                 <data android:mimeType="text/plain" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.nfc.action.TECH_DISCOVERED" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.nfc.action.TECH_DISCOVERED"
-                android:resource="@xml/nfc_tech_filter" />
         </activity>
-        <activity android:name=".ClassAttendenceActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
+        <activity android:name=".ClassAttendenceActivity"
+            android:launchMode="singleInstance"
+            >
             <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
                 <category android:name="android.intent.category.DEFAULT" />
-
                 <data android:mimeType="text/plain" />
             </intent-filter>
             <intent-filter>
@@ -59,7 +50,9 @@
         <activity
             android:name=".LecutererClassesListActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".InstituteDashboardActivity" />
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".InstituteDashboardActivity" />
         <activity android:name=".TodaysClassesActivity" />
         <activity
             android:name=".LecturerDashboardActivity"
@@ -69,7 +62,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

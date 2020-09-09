@@ -10,6 +10,13 @@ public class Lecturer {
         this.documentName=documentName;
     }
 
+    public Lecturer() {
+    }
+
+    public Lecturer(String email) {
+        this.email = email;
+    }
+
     public String getDocumentName() {
         return documentName;
     }
