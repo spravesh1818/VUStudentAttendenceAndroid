@@ -4,12 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddClassesActivity">
+    tools:context=".activities.AddClassesActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/add_classes_toolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleTextColor="@android:color/white"
+        android:background="?attr/colorPrimary">
+    </androidx.appcompat.widget.Toolbar>
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/classListRecyclerView"
         android:layout_width="match_parent"
+        android:layout_below="@+id/add_classes_toolbar"
         android:layout_height="match_parent"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -21,6 +31,8 @@
         android:layout_alignParentEnd="true"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
+        android:src="@drawable/ic_add"
+        android:backgroundTint="#FFFFFF"
         tools:ignore="MissingConstraints"
         />
 

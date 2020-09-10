@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:theme="@style/AppTheme.NoActionBar"
-    tools:context=".InstituteDashboardActivity">
+    tools:context=".activities.InstituteDashboardActivity">
 
     <LinearLayout
         android:orientation="vertical"
@@ -26,7 +26,7 @@
                 android:id="@+id/txtDashboard"
                 android:textSize="24sp"
                 android:textColor="#FFFFFF"
-                android:text="Lecturer Dashboard"
+                android:text="Institute Dashboard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"></TextView>
 
@@ -57,7 +57,7 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:src="@mipmap/myclasses"
+                        android:src="@mipmap/teacher"
                         android:layout_width="80dp"
                         android:layout_height="80dp"></ImageView>
                     <TextView
@@ -88,7 +88,7 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:src="@mipmap/myclasses"
+                        android:src="@mipmap/classroom"
                         android:layout_width="80dp"
                         android:layout_height="80dp"></ImageView>
                     <TextView
@@ -120,7 +120,7 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:src="@mipmap/myclasses"
+                        android:src="@mipmap/students"
                         android:layout_width="80dp"
                         android:layout_height="80dp"></ImageView>
                     <TextView
