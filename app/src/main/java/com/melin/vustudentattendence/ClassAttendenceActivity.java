@@ -63,7 +63,6 @@ public class ClassAttendenceActivity extends AppCompatActivity {
         }
         incomingIntentData=getIntent().getExtras().getString("document");
         fs=FirebaseFirestore.getInstance();
-        Toast.makeText(this,incomingIntentData,Toast.LENGTH_LONG).show();
         recyclerView=(RecyclerView)findViewById(R.id.attendenceListRecyclerView);
         LinearLayoutManager layoutManager=new LinearLayoutManager(ClassAttendenceActivity.this);
         recyclerView.setLayoutManager(layoutManager);

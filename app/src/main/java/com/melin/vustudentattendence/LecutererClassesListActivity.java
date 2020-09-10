@@ -38,7 +38,6 @@ public class LecutererClassesListActivity extends AppCompatActivity {
         fs=FirebaseFirestore.getInstance();
         incomingIntentData=getIntent().getExtras().getString("document");
         classBaseUrl=incomingIntentData+"classes";
-        Toast.makeText(this,classBaseUrl,Toast.LENGTH_LONG).show();
 
         try{
             getDataAndPopulateView(classBaseUrl);

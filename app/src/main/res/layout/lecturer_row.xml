@@ -1,31 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView android:id="@+id/teacherCard"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_columnWeight="1"
     android:layout_rowWeight="1"
-    app:cardElevation="6dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/stroke_color"
+    app:cardElevation="0dp"
+    app:cardCornerRadius="5dp"
     android:layout_margin="12dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/row_padding_vertical"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/row_padding_vertical">
+    >
     <TextView
         android:id="@+id/title_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:textSize="16dp"
-        android:textStyle="bold" />
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:textAlignment="center"
+        />
 
     <TextView
         android:id="@+id/subtitle_textView"
@@ -35,12 +38,15 @@
 
     <Button
         android:id="@+id/attendenceButton"
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@color/colorPrimary"
+        android:textColor="#FFFFFF"
+
         android:layout_alignParentRight="true"
         android:text="Take Attendence">
     </Button>
 
 
-</RelativeLayout>
+</LinearLayout>
 </androidx.cardview.widget.CardView>
