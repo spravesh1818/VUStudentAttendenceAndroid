@@ -244,15 +244,15 @@ public class ClassAttendenceActivity extends AppCompatActivity {
 
                 Toast.makeText(ClassAttendenceActivity.this,"Student ID"+result+"Detected",Toast.LENGTH_LONG).show();
 
-//                for(Student student:students){
-//                    if(student.getStudent_id().equals(result)){
-//                        student.setStatus("PRESENT");
-//                        Toast.makeText(ClassAttendenceActivity.this,"Student ID"+student.getStudent_id()+"Detected",Toast.LENGTH_LONG).show();
-//                    }
-//                }
-//
-//                adapter=new ClassAttendenceRowAdapter(students);
-//                recyclerView.setAdapter(adapter);
+                for(Student student:students){
+                    if(student.getStudent_id().equals(result)){
+                        student.setStatus("PRESENT");
+                        Toast.makeText(ClassAttendenceActivity.this,"Student ID"+student.getStudent_id()+"Detected",Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                adapter=new ClassAttendenceRowAdapter(students);
+                recyclerView.setAdapter(adapter);
             }
         }
     }
