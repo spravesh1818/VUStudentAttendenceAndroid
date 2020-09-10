@@ -31,7 +31,7 @@ public class InstituteDashboardActivity extends AppCompatActivity{
         addClasses=(CardView)findViewById(R.id.add_classes);
         addStudents=(CardView)findViewById(R.id.add_students);
         adminSignOut=(CardView)findViewById(R.id.admin_signout);
-
+        builder=new AlertDialog.Builder(this);
 
         addLecturers.setOnClickListener(new View.OnClickListener() {
             @Override
