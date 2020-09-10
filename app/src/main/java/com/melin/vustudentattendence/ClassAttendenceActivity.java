@@ -61,13 +61,13 @@ public class ClassAttendenceActivity extends AppCompatActivity {
         }else{
             Toast.makeText(this, "NFC is in reader mode", Toast.LENGTH_SHORT).show();
         }
-        //incomingIntentData=getIntent().getExtras().getString("document");
-        //fs=FirebaseFirestore.getInstance();
-        //Toast.makeText(this,incomingIntentData,Toast.LENGTH_LONG).show();
-        //recyclerView=(RecyclerView)findViewById(R.id.attendenceListRecyclerView);
-//        LinearLayoutManager layoutManager=new LinearLayoutManager(ClassAttendenceActivity.this);
-//        recyclerView.setLayoutManager(layoutManager);
-//        populateStudentList(incomingIntentData);
+        incomingIntentData=getIntent().getExtras().getString("document");
+        fs=FirebaseFirestore.getInstance();
+        Toast.makeText(this,incomingIntentData,Toast.LENGTH_LONG).show();
+        recyclerView=(RecyclerView)findViewById(R.id.attendenceListRecyclerView);
+        LinearLayoutManager layoutManager=new LinearLayoutManager(ClassAttendenceActivity.this);
+        recyclerView.setLayoutManager(layoutManager);
+        populateStudentList(incomingIntentData);
         handleIntent(getIntent());
     }
 
@@ -107,18 +107,6 @@ public class ClassAttendenceActivity extends AppCompatActivity {
 
     }
 
-    public void simulatingAnIntent(){
-        String student_id="101";
-        for(Student student:students){
-            if(student.getStudent_id().equals(student_id)){
-                student.setStatus("PRESENT");
-                Toast.makeText(ClassAttendenceActivity.this,"Student ID"+student.getStudent_id()+"Detected",Toast.LENGTH_LONG).show();
-            }
-        }
-
-        adapter=new ClassAttendenceRowAdapter(students);
-        recyclerView.setAdapter(adapter);
-    }
 
 
     @Override
